@@ -14,6 +14,11 @@
             "zonuexe\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "zonuexe\\": "tests"
+        }
+    },
     "require": {
         "php": "^7.4"
     },

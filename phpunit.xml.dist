@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9/phpunit.xsd"
+    backupGlobals="true"
+    backupStaticAttributes="false"
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    timeoutForSmallTests="1"
+    timeoutForMediumTests="10"
+    timeoutForLargeTests="60"
+    verbose="false">
+  <testsuites>
+    <testsuite name="Control-Structures">
+      <directory>tests/</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
