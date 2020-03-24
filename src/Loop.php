@@ -1,0 +1,79 @@
+<?php
+
+namespace zonuexe;
+
+use ArrayIterator;
+use Closure;
+use Generator;
+use function is_array;
+
+final class Loop
+{
+    public static function _for(Closure $init, Closure $cont, Closure $each): Generator
+    {
+        $init();
+        $iter = Loop::_while($cont);
+
+        begin:
+
+        if ($iter->valid()) {
+            yield;
+            $each();
+            $iter->next();
+
+            goto begin;
+        }
+    }
+
+    public static function _foreach(iterable $iter): Generator
+    {
+        if (is_array($iter)) {
+            $iter = new ArrayIterator($iter);
+        }
+
+        begin:
+
+        if ($iter->valid()) {
+            yield $iter->key() => $iter->current();
+            $iter->next();
+
+            goto begin;
+        }
+    }
+
+    public static function _while(Closure $cond): Generator
+    {
+        begin:
+
+        if ($cond()) {
+            yield;
+
+            goto begin;
+        }
+    }
+
+    public static function for(Closure $init, Closure $cont, Closure $each, Closure $body): void
+    {
+        Loop::foreach(Loop::_for($init, $cont, $each), $body);
+    }
+
+
+    public static function foreach(iterable $iter, Closure $body): void
+    {
+        $loop = Loop::_foreach($iter);
+
+        begin:
+
+        if ($loop->valid()) {
+            $body($loop->key(), $loop->current());
+            $loop->next();
+
+            goto begin;
+        }
+    }
+
+    public static function while(Closure $cond, Closure $body): void
+    {
+        Loop::foreach(Loop::_while($cond), $body);
+    }
+}
