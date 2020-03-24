@@ -75,4 +75,10 @@ final class Loop
     {
         Loop::foreach(Loop::_while($cond), $body);
     }
+
+    public static function do_while(Closure $body, Closure $cond): void
+    {
+        $body();
+        Loop::while($cond, $body);
+    }
 }
