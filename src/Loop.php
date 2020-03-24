@@ -76,6 +76,21 @@ final class Loop
         Loop::foreach(Loop::_while($cond), $body);
     }
 
+    /**
+     * @param array{while?:Closure}|array{until?:Closure} $cond
+     */
+    public static function do(Closure $body, array $cond): void
+    {
+        if (isset($cond['until'])) {
+            $test = fn () => !$cond['until']();
+        } else {
+            $tets = $cond['while'] ?? fn () => false;
+        }
+
+        $body();
+        Loop::while($test, $body);
+    }
+
     public static function do_while(Closure $body, Closure $cond): void
     {
         $body();

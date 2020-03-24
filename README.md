@@ -45,6 +45,34 @@ Loop::until(
 );
 ```
 
+## `Loop::do()`
+
+```php
+<?php
+
+use zonuexe\Loop;
+
+$i = 0;
+
+Loop::do(
+    function () use (&$i) { var_dump($i++); },
+    ['while' => function () use (&$i) { return $i < 0; }]
+);
+```
+
+```php
+<?php
+
+use zonuexe\Loop;
+
+$i = 0;
+
+Loop::do(
+    function () use (&$i) { var_dump($i++); },
+    ['until' => function () use (&$i) { return $i === 10; }]
+);
+```
+
 ## `Loop::for()`
 
 ```php
