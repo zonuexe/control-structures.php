@@ -15,6 +15,21 @@ Loop::while(
 );
 ```
 
+## `Loop::do_while()`
+
+```php
+<?php
+
+use zonuexe\Loop;
+
+$i = 0;
+
+Loop::do_while(
+    function () use (&$i) { var_dump($i++); },  // dumps "int(0)"
+    function () use (&$i) { return $i < 0; }
+);
+```
+
 ## `Loop::for()`
 
 ```php
