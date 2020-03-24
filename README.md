@@ -30,6 +30,21 @@ Loop::do_while(
 );
 ```
 
+## `Loop::until()`
+
+```php
+<?php
+
+use zonuexe\Loop;
+
+$i = 0;
+
+Loop::until(
+    function () use (&$i) { return $i === 10; },
+    function () use (&$i) { var_dump($i++); }
+);
+```
+
 ## `Loop::for()`
 
 ```php

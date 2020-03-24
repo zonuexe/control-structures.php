@@ -81,4 +81,9 @@ final class Loop
         $body();
         Loop::while($cond, $body);
     }
+
+    public static function until(Closure $cond, Closure $body): void
+    {
+        Loop::while(fn() => !$cond(), $body);
+    }
 }
