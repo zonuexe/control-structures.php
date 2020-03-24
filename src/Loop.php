@@ -57,7 +57,6 @@ final class Loop
         Loop::foreach(Loop::_for($init, $cont, $each), $body);
     }
 
-
     public static function foreach(iterable $iter, Closure $body): void
     {
         $loop = Loop::_foreach($iter);
