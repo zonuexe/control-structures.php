@@ -52,6 +52,13 @@ final class Loop
         }
     }
 
+    public static function _negate(Closure $cond): Closure
+    {
+        return function () use ($cond) {
+            return !$cond();
+        };
+    }
+
     public static function for(Closure $init, Closure $cont, Closure $each, Closure $body): void
     {
         Loop::foreach(Loop::_for($init, $cont, $each), $body);
@@ -80,5 +87,10 @@ final class Loop
     {
         $body();
         Loop::while($cond, $body);
+    }
+
+    public static function until(Closure $cond, Closure $body): void
+    {
+        Loop::while(Loop::_negate($cond), $body);
     }
 }
