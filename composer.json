@@ -17,6 +17,10 @@
     "require": {
         "php": "^7.4"
     },
+    "require-dev": {
+        "phpunit/php-invoker": "^3.0",
+        "phpunit/phpunit": "^9.0"
+    },
     "config": {
         "sort-packages": true
     }
